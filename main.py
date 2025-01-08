@@ -1,22 +1,32 @@
-import streamlit as st
+import random
 
-st.title("나의 첫번째 앱")
-import streamlit as st
+def football_quiz():
+    players = [
+        {"name": "Lionel Messi", "hint": "He is an Argentinian player and has won 7 Ballon d'Or awards."},
+        {"name": "Cristiano Ronaldo", "hint": "This Portuguese star is famous for his goal-scoring records."},
+        {"name": "Kylian Mbappé", "hint": "A French forward who starred in the 2018 World Cup at a young age."},
+        {"name": "Neymar Jr", "hint": "A Brazilian forward known for his skills and flair."},
+        {"name": "Zlatan Ibrahimović", "hint": "A Swedish striker famous for his acrobatic goals."},
+    ]
 
-st.button("Reset", type="primary")
-if st.button("Say hello"):
-    st.write("Why hello there")
-else:
-    st.write("Goodbye")
+    print("Welcome to the Football Player Guessing Game!\n")
+    random_player = random.choice(players)
 
-if st.button("Aloha", type="tertiary"):
-    st.write("Ciao")
-import streamlit as st
+    print("Hint: ", random_player["hint"])
 
-left, middle, right = st.columns(3)
-if left.button("Plain button", use_container_width=True):
-    left.markdown("You clicked the plain button.")
-if middle.button("Emoji button", icon="😃", use_container_width=True):
-    middle.markdown("You clicked the emoji button.")
-if right.button("Material button", icon=":material/mood:", use_container_width=True):
-    right.markdown("You clicked the Material button.")
+    attempts = 3
+    while attempts > 0:
+        guess = input(f"You have {attempts} attempts left. Enter your guess: ")
+        if guess.lower() == random_player["name"].lower():
+            print("Correct! You guessed the player.")
+            break
+        else:
+            print("Wrong guess. Try again!")
+            attempts -= 1
+
+    if attempts == 0:
+        print(f"Sorry, you've run out of attempts. The correct answer was {random_player['name']}.")
+
+if __name__ == "__main__":
+    football_quiz()
+
